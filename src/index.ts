@@ -1,9 +1,12 @@
-import express, { Application, Request, Response, NextFunction } from 'express';
+import express, { Application, Request, Response } from 'express';
+import 'dotenv/config';
+
+const port = process.env.PORT || 8080;
 
 const app: Application = express();
-const port = 8080;
-app.use('/', (req: Request, res: Response, next: NextFunction) => {
-  res.status(200).send({ data: 'Hello from back wishlist' });
+
+app.get('/', (req: Request, res: Response) => {
+  res.send({ data: 'Hello from back wishlist' });
 });
 
 app.listen(port, () => console.log(`Server is listening on port ${port}!`));
