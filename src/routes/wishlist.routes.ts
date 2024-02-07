@@ -8,6 +8,6 @@ router.get('/wishlist', wishlistController.getWishlistsByUser);
 // router.get('/wishlist', wishlistController.getUsers);
 // router.get('/wishlist/:id', wishlistController.getOneUser);
 // router.put('/wishlist', wishlistController.updateUser);
-// router.delete('/wishlist/:id', wishlistController.deleteUser);
+router.delete('/wishlist/:id', wishlistController.deleteWishlist);
 
 export default router;

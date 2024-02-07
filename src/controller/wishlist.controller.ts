@@ -26,11 +26,11 @@ class WishlistController {
   //   const user = await db.query('UPDATE person set name = $1, surname = $2 where id = $3 RETURNING *', [name, surname, id]);
   //   res.json(user.rows[0]);
   // }
-  // async deleteUser(req: { params: { id: number } }, res: Response) {
-  //   const id = req.params.id;
-  //   const user = await db.query('DELETE FROM person where id = $1', [id]);
-  //   res.json(user.rows[0]);
-  // }
+  async deleteWishlist(req: { params: { id: number } }, res: Response) {
+    const { id } = req.params;
+    const user = await db.query('DELETE FROM wishlists where id = $1', [id]);
+    res.json(user.rows[0]);
+  }
 }
 
 export default new WishlistController();
