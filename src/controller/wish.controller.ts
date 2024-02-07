@@ -13,11 +13,11 @@ class WishController {
     ]);
     res.json(newWish.rows[0]);
   }
-  // async getWishByWishlist(req: { query: { id: number } }, res: Response) {
-  //   const id = req.query.id;
-  //   const wishlists = await db.query('SELECT * from wishlists where user_id = $1', [id]);
-  //   res.json(wishlists.rows);
-  // }
+  async getWishesByWishlist(req: { query: { wishlist_id: number } }, res: Response) {
+    const wishlist_id = req.query.wishlist_id;
+    const wishlists = await db.query('SELECT * from wishes where wishlist_id = $1', [wishlist_id]);
+    res.json(wishlists.rows);
+  }
   // async getUsers(_req: any, res: Response) {
   //   const users = await db.query('SELECT * FROM person');
   //   res.json(users.rows);
