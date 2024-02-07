@@ -4,12 +4,12 @@ CREATE TABLE users (
 );
 CREATE TABLE wishlists (
   id SERIAL PRIMARY KEY,
-  user_id INTEGER REFERENCES users(id),
+  user_id INTEGER REFERENCES users(id) on DELETE CASCADE,
   title VARCHAR(60) NOT NULL
 );
 CREATE TABLE wishes (
   id SERIAL PRIMARY KEY,
-  wishlist_id INTEGER REFERENCES wishlists(id),
+  wishlist_id INTEGER REFERENCES wishlists(id) on DELETE CASCADE,
   name VARCHAR(60) NOT NULL,
   description TEXT,
   link VARCHAR(255),
