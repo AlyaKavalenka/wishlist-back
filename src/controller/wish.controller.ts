@@ -2,13 +2,13 @@ import { Response } from 'express';
 import db from '../db';
 
 class WishController {
-  async createWish(req: { body: { wishlist_id: number, name: string, description: string, link: string, photos: string[] } }, res: Response) {
-    const { wishlist_id, name, description, link, photos } = req.body;
-    const newWish = await db.query('INSERT INTO wishes (wishlist_id, name, description, link, photos) values ($1, $2, $3, $4, $5) RETURNING *', [
+  async createWish(req: { body: { wishlist_id: number, name: string, description: string, links: string[], photos: string[] } }, res: Response) {
+    const { wishlist_id, name, description, links, photos } = req.body;
+    const newWish = await db.query('INSERT INTO wishes (wishlist_id, name, description, links, photos) values ($1, $2, $3, $4, $5) RETURNING *', [
       wishlist_id,
       name,
       description,
-      link,
+      links,
       photos,
     ]);
     res.json(newWish.rows[0]);

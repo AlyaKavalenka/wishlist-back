@@ -12,6 +12,6 @@ CREATE TABLE wishes (
   wishlist_id INTEGER REFERENCES wishlists(id) on DELETE CASCADE,
   name VARCHAR(60) NOT NULL,
   description TEXT,
-  link VARCHAR(255),
+  links TEXT[],
   photos TEXT[]
 );
