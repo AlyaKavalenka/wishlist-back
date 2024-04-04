@@ -5,6 +5,6 @@ export class Wishlist {
   @PrimaryGeneratedColumn('uuid')
   id: number;
 
-  @Column()
+  @Column({ length: 30 })
   title: string;
 }
