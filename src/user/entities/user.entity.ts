@@ -8,4 +8,7 @@ export class User {
 
   @Column({ unique: true, length: 20 })
   username: string;
+
+  @Column()
+  password: string;
 }

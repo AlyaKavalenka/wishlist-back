@@ -18,7 +18,6 @@ import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 export class UserController {
   constructor(private readonly userService: UserService) {}
 
-  // TODO:
   @Post()
   @HttpCode(201)
   @ApiOperation({ summary: 'Create new user' })
@@ -28,7 +27,8 @@ export class UserController {
   })
   @ApiResponse({
     status: 400,
-    description: 'If request body does not contain required fields',
+    description:
+      'If request body does not contain required fields or user with request username is already exist',
   })
   create(@Body() createUserDto: CreateUserDto) {
     return this.userService.create(createUserDto);
