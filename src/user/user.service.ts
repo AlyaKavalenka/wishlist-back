@@ -33,9 +33,11 @@ export class UserService {
 
     return UserDto.convert(newUser);
   }
-  // TODO:
-  findAll() {
-    return `This action returns all user`;
+
+  async findAll() {
+    const users = await this.userRep.find();
+
+    return users.map((user) => UserDto.convert(user));
   }
   // TODO:
   findOne(id: number) {
