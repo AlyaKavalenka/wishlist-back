@@ -41,9 +41,7 @@ export class UserController {
     return this.userService.findAll();
   }
 
-  // TODO:
   @Get(':id')
-  @ApiOperation({ summary: 'Get one user by id' })
   @ApiOperation({ summary: 'Get single user by id' })
   @ApiResponse({
     status: 200,
@@ -58,7 +56,7 @@ export class UserController {
     description: 'If record with id === userId doesn`t exist',
   })
   findOne(@Param('id') id: string) {
-    return this.userService.findOne(+id);
+    return this.userService.findOne(id);
   }
 
   // TODO:
@@ -77,7 +75,7 @@ export class UserController {
     description: 'If record with id === userId doesn`t exist',
   })
   update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
-    return this.userService.update(+id, updateUserDto);
+    return this.userService.update(id, updateUserDto);
   }
 
   // TODO:
@@ -97,6 +95,6 @@ export class UserController {
     description: 'If record with id === userId doesn`t exist',
   })
   remove(@Param('id') id: string) {
-    return this.userService.remove(+id);
+    return this.userService.remove(id);
   }
 }

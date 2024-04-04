@@ -1,4 +1,8 @@
-import { BadRequestException, Injectable } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { User } from './entities/user.entity';
@@ -39,16 +43,20 @@ export class UserService {
 
     return users.map((user) => UserDto.convert(user));
   }
-  // TODO:
-  findOne(id: number) {
-    return `This action returns a #${id} user`;
+
+  async findOne(id: string) {
+    const user = await this.userRep.findOneBy({ id });
+
+    if (!user) throw new NotFoundException();
+
+    return UserDto.convert(user);
   }
   // TODO:
-  update(id: number, updateUserDto: UpdateUserDto) {
+  update(id: string, updateUserDto: UpdateUserDto) {
     return `This action updates a #${id} user`;
   }
   // TODO:
-  remove(id: number) {
+  remove(id: string) {
     return `This action removes a #${id} user`;
   }
 }
