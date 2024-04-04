@@ -7,6 +7,7 @@ import {
   Param,
   Delete,
   HttpCode,
+  ParseUUIDPipe,
 } from '@nestjs/common';
 import { UserService } from './user.service';
 import { CreateUserDto } from './dto/create-user.dto';
@@ -74,7 +75,10 @@ export class UserController {
     status: 404,
     description: 'If record with id === userId doesn`t exist',
   })
-  update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
+  update(
+    @Param('id', new ParseUUIDPipe()) id: string,
+    @Body() updateUserDto: UpdateUserDto,
+  ) {
     return this.userService.update(id, updateUserDto);
   }
 
