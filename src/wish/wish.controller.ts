@@ -33,23 +33,28 @@ export class WishController {
     return this.wishService.create(createWishDto, wishlist_id);
   }
 
-  // TODO:
   @Get()
+  @ApiResponse({
+    status: 200,
+    description: 'Find all wishes',
+  })
   findAll() {
     return this.wishService.findAll();
   }
 
-  // TODO:
-  @Get()
+  @Get('wishlist/:wishlist_id')
+  @ApiResponse({
+    status: 200,
+    description: 'Find wishes by wishlist_id',
+  })
   findAllByWishlist(
     @Param('wishlist_id', new ParseUUIDPipe()) wishlist_id: string,
   ) {
     return this.wishService.findAllByWishlist(wishlist_id);
   }
 
-  // TODO:
-  @Get(':wish_id')
-  findOne(@Param('wishlist_id', new ParseUUIDPipe()) wish_id: string) {
+  @Get('wish/:wish_id')
+  findOne(@Param('wish_id', new ParseUUIDPipe()) wish_id: string) {
     return this.wishService.findOne(wish_id);
   }
 

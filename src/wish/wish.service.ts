@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateWishDto } from './dto/create-wish.dto';
 import { UpdateWishDto } from './dto/update-wish.dto';
 import { WishlistService } from 'src/wishlist/wishlist.service';
@@ -34,19 +34,26 @@ export class WishService {
     return newWish;
   }
 
-  // TODO:
-  findAll() {
-    return `This action returns all wish`;
+  async findAll() {
+    return await this.wishRep.find();
   }
 
-  // TODO:
-  findAllByWishlist(wishlist_id: string) {
-    return `This action returns all wish by #${wishlist_id}`;
+  async findAllByWishlist(wishlist_id: string) {
+    const wishes = await this.wishRep.findBy({
+      wishlist: {
+        wishlist_id,
+      },
+    });
+    if (!wishes) throw new NotFoundException();
+
+    return wishes;
   }
 
-  // TODO:
-  findOne(wish_id: string) {
-    return `This action returns a #${wish_id} wish`;
+  async findOne(wish_id: string) {
+    const wish = await this.wishRep.findOneBy({ wish_id });
+
+    if (!wish) throw new NotFoundException();
+    return wish;
   }
 
   // TODO:

@@ -10,7 +10,7 @@ import {
 @Entity()
 export class Wish {
   @PrimaryGeneratedColumn('uuid')
-  wish_id: number;
+  wish_id: string;
 
   @Column({ length: 60 })
   name: string;
@@ -24,7 +24,7 @@ export class Wish {
   @Column({ type: 'text', array: true })
   photos: string[];
 
-  @ManyToOne(() => Wishlist)
+  @ManyToOne(() => Wishlist, { eager: true })
   @JoinColumn()
   wishlist: Wishlist;
 }
