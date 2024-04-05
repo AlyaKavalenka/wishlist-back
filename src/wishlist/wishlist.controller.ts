@@ -81,7 +81,6 @@ export class WishlistController {
     return this.wishlistService.update(id, updateWishlistDto);
   }
 
-  // TODO:
   @Delete(':id')
   @HttpCode(204)
   @ApiOperation({ summary: 'Delete wishlist' })

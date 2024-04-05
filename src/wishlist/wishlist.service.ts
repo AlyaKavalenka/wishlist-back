@@ -40,8 +40,11 @@ export class WishlistService {
     return `This action updates a #${id} wishlist`;
   }
 
-  // TODO:
-  remove(id: string) {
-    return `This action removes a #${id} wishlist`;
+  async remove(id: string) {
+    const wishlist = await this.findOne(id);
+
+    await this.wishlistRep.remove(wishlist);
+
+    return;
   }
 }
