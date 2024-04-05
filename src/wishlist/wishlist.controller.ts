@@ -18,7 +18,6 @@ import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 export class WishlistController {
   constructor(private readonly wishlistService: WishlistService) {}
 
-  // TODO:
   @Post()
   @ApiOperation({ summary: 'Create new wishlist' })
   @ApiResponse({
