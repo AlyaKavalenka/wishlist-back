@@ -44,8 +44,8 @@ export class UserService {
     return users.map((user) => UserDto.convert(user));
   }
 
-  async findOne(id: string) {
-    const user = await this.userRep.findOneBy({ id });
+  async findOne(user_id: string) {
+    const user = await this.userRep.findOneBy({ user_id });
 
     if (!user) throw new NotFoundException();
 
@@ -61,11 +61,11 @@ export class UserService {
   }
 
   // TODO:
-  update(id: string, updateUserDto: UpdateUserDto) {
-    return `This action updates a #${id} user`;
+  update(user_id: string, updateUserDto: UpdateUserDto) {
+    return `This action updates a #${user_id} user`;
   }
   // TODO:
-  remove(id: string) {
-    return `This action removes a #${id} user`;
+  remove(user_id: string) {
+    return `This action removes a #${user_id} user`;
   }
 }

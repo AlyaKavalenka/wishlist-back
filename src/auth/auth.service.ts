@@ -21,12 +21,16 @@ export class AuthService {
         return UserDto.convert(user);
       }
     }
+
+    return null;
   }
 
   private createTokens(user: User) {
-    const { id, username } = user;
-    const payload = { username: username, sub: id };
+    const { user_id, username } = user;
+    const payload = { username: username, sub: user_id };
     return {
+      user_id,
+      username,
       access_token: this.jwtService.sign(payload),
     };
   }

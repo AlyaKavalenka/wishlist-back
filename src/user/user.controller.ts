@@ -46,15 +46,15 @@ export class UserController {
   @ApiOperation({ summary: 'Get single user by id' })
   @ApiResponse({
     status: 200,
-    description: 'If record with id === userId if it exists',
+    description: 'If record with id === user_id if it exists',
   })
   @ApiResponse({
     status: 400,
-    description: 'If userId is invalid (not uuid)',
+    description: 'If user_id is invalid (not uuid)',
   })
   @ApiResponse({
     status: 404,
-    description: 'If record with id === userId doesn`t exist',
+    description: 'If record with id === user_id doesn`t exist',
   })
   findOne(@Param('id', new ParseUUIDPipe()) id: string) {
     return this.userService.findOne(id);
@@ -69,11 +69,11 @@ export class UserController {
   })
   @ApiResponse({
     status: 400,
-    description: 'If userId is invalid (not uuid)',
+    description: 'If user_id is invalid (not uuid)',
   })
   @ApiResponse({
     status: 404,
-    description: 'If record with id === userId doesn`t exist',
+    description: 'If record with id === user_id doesn`t exist',
   })
   update(
     @Param('id', new ParseUUIDPipe()) id: string,
@@ -92,11 +92,11 @@ export class UserController {
   })
   @ApiResponse({
     status: 400,
-    description: 'If userId is invalid (not uuid)',
+    description: 'If user_id is invalid (not uuid)',
   })
   @ApiResponse({
     status: 404,
-    description: 'If record with id === userId doesn`t exist',
+    description: 'If record with id === user_id doesn`t exist',
   })
   remove(@Param('id', new ParseUUIDPipe()) id: string) {
     return this.userService.remove(id);
