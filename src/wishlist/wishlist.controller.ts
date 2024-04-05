@@ -7,6 +7,7 @@ import {
   Param,
   Delete,
   HttpCode,
+  ParseUUIDPipe,
 } from '@nestjs/common';
 import { WishlistService } from './wishlist.service';
 import { CreateWishlistDto } from './dto/create-wishlist.dto';
@@ -40,7 +41,6 @@ export class WishlistController {
     return this.wishlistService.findAll();
   }
 
-  // TODO:
   @Get(':id')
   @ApiOperation({ summary: 'Get single wishlists by id' })
   @ApiResponse({
@@ -55,8 +55,8 @@ export class WishlistController {
     status: 404,
     description: 'If record with id === wishlistId doesn`t exist',
   })
-  findOne(@Param('id') id: string) {
-    return this.wishlistService.findOne(+id);
+  findOne(@Param('id', new ParseUUIDPipe()) id: string) {
+    return this.wishlistService.findOne(id);
   }
 
   // TODO:
@@ -75,10 +75,10 @@ export class WishlistController {
     description: 'If record with id === wishlistId doesn`t exist',
   })
   update(
-    @Param('id') id: string,
+    @Param('id', new ParseUUIDPipe()) id: string,
     @Body() updateWishlistDto: UpdateWishlistDto,
   ) {
-    return this.wishlistService.update(+id, updateWishlistDto);
+    return this.wishlistService.update(id, updateWishlistDto);
   }
 
   // TODO:
@@ -97,7 +97,7 @@ export class WishlistController {
     status: 404,
     description: 'If record with id === wishlistId doesn`t exist',
   })
-  remove(@Param('id') id: string) {
-    return this.wishlistService.remove(+id);
+  remove(@Param('id', new ParseUUIDPipe()) id: string) {
+    return this.wishlistService.remove(id);
   }
 }

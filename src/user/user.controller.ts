@@ -56,7 +56,7 @@ export class UserController {
     status: 404,
     description: 'If record with id === userId doesn`t exist',
   })
-  findOne(@Param('id') id: string) {
+  findOne(@Param('id', new ParseUUIDPipe()) id: string) {
     return this.userService.findOne(id);
   }
 
@@ -98,7 +98,7 @@ export class UserController {
     status: 404,
     description: 'If record with id === userId doesn`t exist',
   })
-  remove(@Param('id') id: string) {
+  remove(@Param('id', new ParseUUIDPipe()) id: string) {
     return this.userService.remove(id);
   }
 }
