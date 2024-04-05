@@ -53,7 +53,7 @@ export class WishController {
     return this.wishService.findAllByWishlist(wishlist_id);
   }
 
-  @Get('wish/:wish_id')
+  @Get(':wish_id')
   findOne(@Param('wish_id', new ParseUUIDPipe()) wish_id: string) {
     return this.wishService.findOne(wish_id);
   }
