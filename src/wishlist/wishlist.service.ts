@@ -27,8 +27,8 @@ export class WishlistService {
     return await this.wishlistRep.find();
   }
 
-  async findOne(id: string) {
-    const wishlist = await this.wishlistRep.findOneBy({ id });
+  async findOne(wishlist_id: string) {
+    const wishlist = await this.wishlistRep.findOneBy({ wishlist_id });
 
     if (!wishlist) throw new NotFoundException();
 
@@ -36,12 +36,12 @@ export class WishlistService {
   }
 
   // TODO:
-  update(id: string, updateWishlistDto: UpdateWishlistDto) {
-    return `This action updates a #${id} wishlist`;
+  update(wishlist_id: string, updateWishlistDto: UpdateWishlistDto) {
+    return `This action updates a #${wishlist_id} wishlist`;
   }
 
-  async remove(id: string) {
-    const wishlist = await this.findOne(id);
+  async remove(wishlist_id: string) {
+    const wishlist = await this.findOne(wishlist_id);
 
     await this.wishlistRep.remove(wishlist);
 

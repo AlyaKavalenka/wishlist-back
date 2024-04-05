@@ -9,6 +9,7 @@ import { AuthModule } from './auth/auth.module';
 import { JwtAuthGuard } from './auth/guards/jwt-auth.guard';
 import { APP_GUARD } from '@nestjs/core';
 import { JwtStrategy } from './auth/jwt.strategy';
+import { WishModule } from './wish/wish.module';
 
 @Module({
   imports: [
@@ -30,6 +31,7 @@ import { JwtStrategy } from './auth/jwt.strategy';
     WishlistModule,
     UserModule,
     AuthModule,
+    WishModule,
   ],
   controllers: [AppController],
   providers: [
