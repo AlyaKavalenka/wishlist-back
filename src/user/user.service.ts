@@ -51,6 +51,15 @@ export class UserService {
 
     return UserDto.convert(user);
   }
+
+  async findOneByUsername(username: string) {
+    const user = await this.userRep.findOneBy({ username });
+
+    if (!user) throw new NotFoundException();
+
+    return user;
+  }
+
   // TODO:
   update(id: string, updateUserDto: UpdateUserDto) {
     return `This action updates a #${id} user`;
