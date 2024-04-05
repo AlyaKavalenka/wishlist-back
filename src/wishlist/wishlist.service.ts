@@ -23,9 +23,8 @@ export class WishlistService {
     return newWishlist;
   }
 
-  // TODO:
-  findAll() {
-    return `This action returns all wishlist`;
+  async findAll() {
+    return await this.wishlistRep.find();
   }
 
   // TODO:

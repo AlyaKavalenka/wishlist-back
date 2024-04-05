@@ -33,7 +33,6 @@ export class WishlistController {
     return this.wishlistService.create(createWishlistDto);
   }
 
-  // TODO:
   @Get()
   @ApiOperation({ summary: 'Get all wishlists' })
   @ApiResponse({ status: 200, description: 'All wishlists records.' })
