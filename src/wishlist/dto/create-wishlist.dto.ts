@@ -7,4 +7,10 @@ export class CreateWishlistDto {
   @IsString()
   @Length(3, 30)
   title: string;
+
+  @ApiProperty()
+  wishlist_img: string | null;
+
+  @ApiProperty()
+  event_date: Date | null;
 }

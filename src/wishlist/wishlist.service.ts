@@ -13,10 +13,12 @@ export class WishlistService {
   ) {}
 
   async create(createWishlistDto: CreateWishlistDto) {
-    const { title } = createWishlistDto;
+    const { title, wishlist_img, event_date } = createWishlistDto;
 
     const newWishlist = new Wishlist();
     newWishlist.title = title;
+    if (wishlist_img) newWishlist.wishlist_img = wishlist_img;
+    if (event_date) newWishlist.event_date = event_date;
 
     await this.wishlistRep.save(newWishlist);
 

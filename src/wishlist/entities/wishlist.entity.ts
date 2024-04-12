@@ -1,4 +1,9 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  Entity,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
+} from 'typeorm';
 
 @Entity()
 export class Wishlist {
@@ -7,4 +12,13 @@ export class Wishlist {
 
   @Column({ length: 30, unique: true })
   title: string;
+
+  @Column({ nullable: true })
+  wishlist_img: string | null;
+
+  @Column({ nullable: true })
+  event_date: Date | null;
+
+  @UpdateDateColumn()
+  update_at: Date;
 }

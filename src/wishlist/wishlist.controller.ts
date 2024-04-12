@@ -13,7 +13,10 @@ import { WishlistService } from './wishlist.service';
 import { CreateWishlistDto } from './dto/create-wishlist.dto';
 import { UpdateWishlistDto } from './dto/update-wishlist.dto';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { Public } from 'src/auth/decorators/public.decorator';
 
+// TODO: remove public
+@Public()
 @ApiTags('wishlist')
 @Controller('wishlist')
 export class WishlistController {
