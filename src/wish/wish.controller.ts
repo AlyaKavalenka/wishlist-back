@@ -42,16 +42,16 @@ export class WishController {
     return this.wishService.findAll();
   }
 
-  // @Get('wishlist/:wishlist_id')
-  // @ApiResponse({
-  //   status: 200,
-  //   description: 'Find wishes by wishlist_id',
-  // })
-  // findAllByWishlist(
-  //   @Param('wishlist_id', new ParseUUIDPipe()) wishlist_id: string,
-  // ) {
-  //   return this.wishService.findAllByWishlist(wishlist_id);
-  // }
+  @Get('wishlist/:wishlist_id')
+  @ApiResponse({
+    status: 200,
+    description: 'Find wishes by wishlist_id',
+  })
+  findAllByWishlist(
+    @Param('wishlist_id', new ParseUUIDPipe()) wishlist_id: string,
+  ) {
+    return this.wishService.findAllByWishlist(wishlist_id);
+  }
 
   @Get(':wish_id')
   findOne(@Param('wish_id', new ParseUUIDPipe()) wish_id: string) {

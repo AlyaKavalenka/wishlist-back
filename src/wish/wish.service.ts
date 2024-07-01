@@ -43,16 +43,16 @@ export class WishService {
     return await this.wishRep.find();
   }
 
-  // async findAllByWishlist(wishlist_id: string) {
-  //   const wishes = await this.wishRep.findBy({
-  //     wishlist: {
-  //       wishlist_id,
-  //     },
-  //   });
-  //   if (!wishes) throw new NotFoundException();
+  async findAllByWishlist(wishlist_id: string) {
+    const wishes = await this.wishRep.findBy({
+      wishlists: {
+        wishlist_id,
+      },
+    });
+    if (!wishes) throw new NotFoundException();
 
-  //   return wishes;
-  // }
+    return wishes;
+  }
 
   async findOne(wish_id: string) {
     const wish = await this.wishRep.findOneBy({ wish_id });
