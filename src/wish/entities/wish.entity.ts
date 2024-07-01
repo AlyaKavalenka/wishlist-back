@@ -2,8 +2,8 @@ import { Wishlist } from 'src/wishlist/entities/wishlist.entity';
 import {
   Column,
   Entity,
-  JoinColumn,
-  ManyToOne,
+  JoinTable,
+  ManyToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
 
@@ -24,7 +24,7 @@ export class Wish {
   @Column({ type: 'text', array: true })
   photos: string[];
 
-  @ManyToOne(() => Wishlist, { eager: true })
-  @JoinColumn()
-  wishlist: Wishlist;
+  @ManyToMany(() => Wishlist, { eager: true })
+  @JoinTable()
+  wishlists: Wishlist[];
 }

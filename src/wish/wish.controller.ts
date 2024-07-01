@@ -12,25 +12,25 @@ import {
 import { WishService } from './wish.service';
 import { CreateWishDto } from './dto/create-wish.dto';
 import { UpdateWishDto } from './dto/update-wish.dto';
-import { ApiResponse, ApiTags } from '@nestjs/swagger';
+import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { Public } from 'src/auth/decorators/public.decorator';
 
+// TODO: remove public
+@Public()
 @ApiTags('wish')
 @Controller('wish')
 export class WishController {
   constructor(private readonly wishService: WishService) {}
 
-  @Post(':wishlist_id')
+  @Post()
+  @ApiOperation({ summary: 'Create new wish' })
   @HttpCode(201)
   @ApiResponse({
     status: 201,
-    description:
-      'Create wish by wishlist_id. In case wishlist_id is null creating/update "Untitled" wishlist',
+    description: 'Create wish',
   })
-  create(
-    @Param('wishlist_id') wishlist_id: string,
-    @Body() createWishDto: CreateWishDto,
-  ) {
-    return this.wishService.create(createWishDto, wishlist_id);
+  create(@Body() createWishDto: CreateWishDto) {
+    return this.wishService.create(createWishDto);
   }
 
   @Get()
@@ -42,16 +42,16 @@ export class WishController {
     return this.wishService.findAll();
   }
 
-  @Get('wishlist/:wishlist_id')
-  @ApiResponse({
-    status: 200,
-    description: 'Find wishes by wishlist_id',
-  })
-  findAllByWishlist(
-    @Param('wishlist_id', new ParseUUIDPipe()) wishlist_id: string,
-  ) {
-    return this.wishService.findAllByWishlist(wishlist_id);
-  }
+  // @Get('wishlist/:wishlist_id')
+  // @ApiResponse({
+  //   status: 200,
+  //   description: 'Find wishes by wishlist_id',
+  // })
+  // findAllByWishlist(
+  //   @Param('wishlist_id', new ParseUUIDPipe()) wishlist_id: string,
+  // ) {
+  //   return this.wishService.findAllByWishlist(wishlist_id);
+  // }
 
   @Get(':wish_id')
   findOne(@Param('wish_id', new ParseUUIDPipe()) wish_id: string) {

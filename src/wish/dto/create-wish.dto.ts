@@ -21,4 +21,8 @@ export class CreateWishDto {
   @IsArray()
   @IsUrl({}, { each: true })
   photos: string[];
+
+  @ApiProperty()
+  @IsArray()
+  wishlists_id: string[];
 }

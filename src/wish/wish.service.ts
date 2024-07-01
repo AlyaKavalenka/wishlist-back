@@ -5,7 +5,6 @@ import { WishlistService } from 'src/wishlist/wishlist.service';
 import { Wish } from './entities/wish.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { Wishlist } from 'src/wishlist/entities/wishlist.entity';
 
 @Injectable()
 export class WishService {
@@ -15,8 +14,8 @@ export class WishService {
     private wishRep: Repository<Wish>,
   ) {}
 
-  async create(createWishDto: CreateWishDto, wishlist_id: string) {
-    const { name, description, links, photos } = createWishDto;
+  async create(createWishDto: CreateWishDto) {
+    const { name, description, links, photos, wishlists_id } = createWishDto;
 
     const newWish = new Wish();
     newWish.name = name;
@@ -24,11 +23,17 @@ export class WishService {
     newWish.links = links;
     newWish.photos = photos;
 
-    const wishlist: Wishlist | null = wishlist_id
-      ? await this.wishlistService.findOne(wishlist_id)
-      : null;
+    const checkedWishlistsIds = [];
+    if (wishlists_id.length) {
+      for (let i = 0; i < wishlists_id.length; i++) {
+        const wishlist = await this.wishlistService.findOne(wishlists_id[i]);
 
-    newWish.wishlist = wishlist;
+        if (!!wishlist) {
+          checkedWishlistsIds.push(wishlist);
+        }
+      }
+    }
+    newWish.wishlists = checkedWishlistsIds;
 
     await this.wishRep.save(newWish);
     return newWish;
@@ -38,16 +43,16 @@ export class WishService {
     return await this.wishRep.find();
   }
 
-  async findAllByWishlist(wishlist_id: string) {
-    const wishes = await this.wishRep.findBy({
-      wishlist: {
-        wishlist_id,
-      },
-    });
-    if (!wishes) throw new NotFoundException();
+  // async findAllByWishlist(wishlist_id: string) {
+  //   const wishes = await this.wishRep.findBy({
+  //     wishlist: {
+  //       wishlist_id,
+  //     },
+  //   });
+  //   if (!wishes) throw new NotFoundException();
 
-    return wishes;
-  }
+  //   return wishes;
+  // }
 
   async findOne(wish_id: string) {
     const wish = await this.wishRep.findOneBy({ wish_id });
